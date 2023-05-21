@@ -1,6 +1,6 @@
 import { createActionCreatorWithPrefix } from '@shared/lib/store';
 
-import { FormValues } from '@features/dynamic-form/model';
+import { FormValues } from '@shared/types';
 
 import { config } from '../config';
 

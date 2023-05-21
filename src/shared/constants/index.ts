@@ -1,5 +1,4 @@
-import { FieldToInputType } from '@shared/types';
-import { FormField } from '@features/dynamic-form';
+import { FieldToInputType, FormField } from '@shared/types';
 
 /** Пример группы полей */
 export const FIELDS_EXAMPLE: FormField[] = [
@@ -35,11 +34,12 @@ export const FIELDS_EXAMPLE: FormField[] = [
   // },
 ];
 
-/**
- * Соотаветствие типа поля типу инпута
- */
+/** Соотаветствие типа поля типу инпута */
 export const FIELD_TO_INPUT_TYPES: FieldToInputType = {
   inputText: 'text',
   inputEmail: 'email',
   inputPassword: 'password',
 };
+
+/** Регулярное выражение для валидации емайл */
+export const emailRegExp = /^(\w|-|\+|\.)+@(\w|-)+\.((\w|-)+\.)*\w+$/;
