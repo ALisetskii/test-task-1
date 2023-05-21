@@ -3,24 +3,23 @@ import React from 'react';
 import { useActions } from '@shared/lib/use-it';
 import { FIELD_TO_INPUT_TYPES } from '@shared/constants';
 
-import { FormField } from '@features/dynamic-form/model/types';
-import { dynamicFormModel } from '@features/dynamic-form';
+import { FormField, actions } from '../model';
 
 /** Пропсы компонента */
-type InputFieldProps = {
+type Props = {
   /** Поля формы */
   field: FormField;
   /** Значение поля формы */
   value: string;
 };
 
-export const InputField: React.FC<InputFieldProps> = ({ field, value }) => {
+export const InputField: React.FC<Props> = ({ field, value }) => {
   const { id, type, required } = field;
 
-  const { setFormValues } = useActions(dynamicFormModel.actions);
+  const { setFormValues } = useActions(actions);
 
-  // Если была бы нужна более сложная валидация или с асинзронными запросами
-  // или избавиться от useEffect в компоненте и проверять валидность формы при каждом изменении и записывая в стор
+  // Если была бы нужна более сложная валидация или с асинхронными запросами
+  // или избавиться от useEffect в компоненте и проверять валидность с помощью js
   // const { onInputChange } = useActions(changeInputModel.actions);
   /**
    * Обработчик редактирования значения поля

@@ -1,14 +1,8 @@
 import { FieldToInputType } from '@shared/types';
-
-/** Контрольные точки ширины экрана устройств пользователей */
-export const WIDTH_BREAKPOINTS = {
-  DESKTOP_WIDTH: 1024,
-  MOBILE_WIDTH: 576,
-  TABLET_WIDTH: 768,
-};
+import { FormField } from '@features/dynamic-form';
 
 /** Пример группы полей */
-export const FIELDS_EXAMPLE = [
+export const FIELDS_EXAMPLE: FormField[] = [
   {
     id: 'first_name',
     type: 'inputText',
@@ -34,9 +28,9 @@ export const FIELDS_EXAMPLE = [
     required: true,
   },
   // {
-  //   id: 'password',
-  //   type: 'inputPassword',
-  //   label: 'Password',
+  //   id: 'someId',
+  //   type: 'inputText',
+  //   label: 'someLabel',
   //   required: true,
   // },
 ];

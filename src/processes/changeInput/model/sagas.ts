@@ -15,7 +15,7 @@ import { actions } from './ducks';
  */
 function* changeInputSaga(payload: FormValues): SagaIterator {
   // Если была бы нужна более сложная валидация или с асинзронными запросами
-  // или избавиться от useEffect в компоненте и проверять валидность формы при каждом изменении
+  // или избавиться от useEffect в компоненте и проверять валидность с помощью js
   yield put(dynamicFormModel.actions.setFormValues(payload));
 }
 

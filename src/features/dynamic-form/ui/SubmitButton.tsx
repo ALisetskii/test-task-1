@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 
 import { useActions } from '@shared/lib/use-it';
 
-import { dynamicFormModel } from '@features/dynamic-form';
+import { selectors, actions } from '../model';
+
+import './SubmitButton.scss';
 
 export const SubmitButton: React.FC = () => {
-  const values = dynamicFormModel.selectors.values();
-  const { setIsFormValid } = useActions(dynamicFormModel.actions);
-  const isFormValid = dynamicFormModel.selectors.isFormValid();
+  const values = selectors.values();
+  const { setIsFormValid } = useActions(actions);
+  const isFormValid = selectors.isFormValid();
 
   useEffect(() => {
     const inputs = document.querySelectorAll('input');

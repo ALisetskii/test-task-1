@@ -16,7 +16,7 @@ const dynamicFormSlice = createSlice({
   name: config.modelName,
   initialState,
   reducers: {
-    setFormFields: (
+    setInitialFormFields: (
       state,
       payloadAction: PayloadAction<Partial<FormField[]>>,
     ) => {

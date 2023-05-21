@@ -1,0 +1,18 @@
+.submit-button {
+  height: 43px;
+  width: 184px;
+  margin-top: 20px;
+  margin-bottom: 49px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  background-color: #007AF4;
+  color:#FFFFFF;
+  border: transparent;
+  border-radius: 6px;
+  font-size: 16px;
+
+  &:disabled{
+    opacity: 50%;
+  }
+}

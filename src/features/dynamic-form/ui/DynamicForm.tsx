@@ -3,6 +3,7 @@ import React from 'react';
 import { selectors } from '../model';
 import { HeaderImage } from './HeaderImage';
 import { InputField } from './InputField';
+import { FieldLabel } from './FieldLabel';
 import './DynamicFrom.scss';
 
 export const DynamicForm: React.FC = () => {
@@ -17,12 +18,8 @@ export const DynamicForm: React.FC = () => {
           return (
             <div className={'form-field'} key={field.id}>
               {field.label ? (
-                <label key={field.id + 'Label'} htmlFor={field.id}>
-                  {field.label}
-                </label>
-              ) : (
-                <div>no label</div>
-              )}
+                <FieldLabel fieldId={field.id} labelText={field.label} />
+              ) : null}
               <InputField field={field} value={values[field.id]} />
             </div>
           );
