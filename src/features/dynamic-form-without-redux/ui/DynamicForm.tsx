@@ -1,27 +1,24 @@
 import React from 'react';
 
-import { FormField, FormValues } from '@shared/types';
+import { FormFields, FormValues, OnChangeValue } from '@shared/types';
+import { FIELD_TO_INPUT_TYPES } from '@shared/constants';
 
 import { HeaderImage } from './HeaderImage';
 import { InputField } from './InputField';
-import { FieldLabel } from './FieldLabel';
+import { MemoizedFieldLabel } from './FieldLabel';
 import './DynamicFrom.scss';
 
 /** Пропсы компонента */
 type Props = {
   /** поля формы */
-  fields: FormField[];
+  fields: FormFields;
   /** значения полей формы */
   values: FormValues;
   /** функция при изменении значений таблицы */
-  onInputChange: (id: string, value: string, type: string) => void;
+  onChange: (value: OnChangeValue) => void;
 };
 
-export const DynamicForm: React.FC<Props> = ({
-  fields,
-  values,
-  onInputChange,
-}) => {
+export const DynamicForm : React.FC<Props> = ({ fields,  values, onChange }) => {
   return (
     <form name={'DynamicForm'}>
       <HeaderImage />
@@ -30,12 +27,14 @@ export const DynamicForm: React.FC<Props> = ({
           return (
             <div className={'form-field'} key={field.id}>
               {field.label ? (
-                <FieldLabel fieldId={field.id} labelText={field.label} />
+                // ИСПРАВИЛ react.memo для лейбла
+                <MemoizedFieldLabel fieldId={field.id} labelText={field.label} />
               ) : null}
               <InputField
                 fieldId={field.id}
-                formValue={values[field.id]}
-                onChange={onInputChange}
+                value={values[field.id].value}
+                type={FIELD_TO_INPUT_TYPES[field.type]}
+                onChange={onChange}
               />
             </div>
           );
@@ -46,3 +45,5 @@ export const DynamicForm: React.FC<Props> = ({
     </form>
   );
 };
+
+export const MemoizedDynamicForm = React.memo(DynamicForm);

@@ -15,3 +15,5 @@ export const FieldLabel: React.FC<Props> = ({ fieldId, labelText }) => {
     </label>
   );
 };
+
+export const MemoizedFieldLabel = React.memo(FieldLabel);
