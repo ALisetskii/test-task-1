@@ -1,4 +1,5 @@
 import { emailRegExp } from '@shared/constants';
+import { InputTypes } from '@shared/types';
 
 /**
  * Валидация емайл по регулярному выражению
@@ -16,20 +17,14 @@ const validateEmail = (value: string) => {
  * @returns {boolean} маркер валидности
  */
 export const validateFormValue = (value: string, type: string): boolean => {
+
   switch (type) {
-    case 'text':
-    case 'password':
-      if (value.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
-      break;
-    case 'email':
+    case InputTypes.Text:
+    case InputTypes.Password:
+      return value.length > 0;
+    case InputTypes.Email:
       return validateEmail(value);
-      break;
     default:
       return false;
-      break;
   }
 };

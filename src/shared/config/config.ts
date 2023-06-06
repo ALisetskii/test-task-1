@@ -5,4 +5,4 @@ export const globalConfig = {
     mainPage: () => '/',
   },
   environment: process.env.NODE_ENV,
-} as const;
+};
