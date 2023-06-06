@@ -1,7 +1,24 @@
+// ИСПРАВИЛ enum вместо type
 /** Типы полей */
-export type FieldTypes = 'inputText' | 'inputEmail' | 'inputPassword';
+export enum FieldTypes {
+  InputText = 'inputText',
+  InputEmail = 'inputEmail',
+  InputPassword = 'inputPassword'
+}
+
 /** Типы инпутов */
-export type InputTypes = 'text' | 'email' | 'password';
+export enum InputTypes {
+  Text = 'text',
+  Email = 'email',
+  Password = 'password'
+}
+
+/**
+ * Соотаветствие типа поля типу инпута
+ */
+export type FieldToInputType = {
+  [key in FieldTypes]: InputTypes;
+};
 
 /** Модель поля формы */
 export type FormField = {
@@ -17,45 +34,39 @@ export type FormField = {
   required?: boolean;
 };
 
-/** Модель формы */
-export type FormState = {
-  fields: FormField[];
-  values: FormValues;
-  isFormValid: boolean;
-};
+export type FormFields = FormField[];
 
-/**
- * Соотаветствие типа поля типу инпута
- */
-export type FieldToInputType = {
-  [key in FieldTypes]: InputTypes;
-};
-
-/**
- * Значения формы
- */
-export type FormValues = {
-  [key in string]: {
-    value: string;
-    required: boolean;
-    type: InputTypes;
-    isValid: boolean;
-  };
-};
-
-/**
- * Значение поля формы
- */
+// ИСПРАВИЛ убрал required и type
+/** Значение поля формы */
 export type FormValue = {
   value: string;
-  required: boolean;
-  type: InputTypes;
   isValid: boolean;
 };
 
-/**
- * Тип для вывода результата
- */
+// ИСПРАВИЛ переиспользование :FormValue
+/** Значения формы */
+export type FormValues = {
+  [key in string]: FormValue;
+};
+
+/** Тип для вывода результата */
 export type Result = {
   [key in string]: string;
+};
+
+/** Тип для изменения значений формы */
+export type OnChangeValue = {
+  id: string,
+  value: string,
+  type: InputTypes
+};
+
+/** Тип возвращаемый хуком useFormControl */
+export type FormControl = {
+  /** Значения полей формы */
+  values: FormValues;
+  /** Обработчик изменения значения */
+  onChange: (onChangeValue:OnChangeValue) => void;
+  /** Функция проверки валидности формы */
+  checkIsFormValid: ()=> boolean
 };

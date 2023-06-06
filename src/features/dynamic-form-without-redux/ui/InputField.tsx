@@ -1,36 +1,36 @@
 import React from 'react';
 
-import { FormValue } from '@shared/types';
+import { InputTypes, OnChangeValue } from '@shared/types';
 
 /** Пропсы компонента */
 type Props = {
   /** Поля формы */
   fieldId: string;
   /** Значение поля формы */
-  formValue: FormValue;
+  value: string;
+  /** Тип инпута */
+  type:InputTypes;
   /** функция при изменении значений таблицы */
-  onChange: (id: string, value: string, type: string) => void;
+  onChange: (value: OnChangeValue) => void;
 };
 
 export const InputField: React.FC<Props> = ({
   fieldId,
-  formValue,
+  value,
+  type,
   onChange,
 }) => {
-  const { required, value, type } = formValue;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(fieldId, event.target.value, type);
+    onChange({ id:fieldId, value:event.target.value, type });
   };
 
   return (
     <input
       onChange={handleChange}
       className={`${type} form-input`}
-      required={required}
       key={fieldId + 'Input'}
       id={fieldId}
-      type={type}
       value={value}
       placeholder={'Enter Value'}
     />

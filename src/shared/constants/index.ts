@@ -1,34 +1,36 @@
-import { FieldToInputType, FormField } from '@shared/types';
+import { FieldToInputType, FieldTypes, FormFields, InputTypes } from '@shared/types';
 
 /** Пример группы полей */
-export const FIELDS_EXAMPLE: FormField[] = [
+export const FIELDS_EXAMPLE: FormFields = [
   {
     id: 'first_name',
-    type: 'inputText',
+    type: FieldTypes.InputText,
     label: 'First Name',
     defaultValue: 'Some first name',
     required: true,
   },
   {
     id: 'last_name',
-    type: 'inputText',
+    type: FieldTypes.InputText,
     label: 'Last Name',
   },
   {
     id: 'email',
-    type: 'inputEmail',
+    type: FieldTypes.InputEmail,
     label: 'Email',
     required: true,
+    defaultValue: 'qqqq@qq.q',
   },
   {
     id: 'password',
-    type: 'inputPassword',
+    type: FieldTypes.InputPassword,
     label: 'Password',
     required: true,
+    defaultValue: 'qqq',
   },
   // {
   //   id: 'someId',
-  //   type: 'inputText',
+  //   type: FieldTypes.InputText,
   //   label: 'someLabel',
   //   required: true,
   // },
@@ -36,9 +38,9 @@ export const FIELDS_EXAMPLE: FormField[] = [
 
 /** Соотаветствие типа поля типу инпута */
 export const FIELD_TO_INPUT_TYPES: FieldToInputType = {
-  inputText: 'text',
-  inputEmail: 'email',
-  inputPassword: 'password',
+  [FieldTypes.InputText]: InputTypes.Text,
+  [FieldTypes.InputEmail]: InputTypes.Email,
+  [FieldTypes.InputPassword]: InputTypes.Password,
 };
 
 /** Регулярное выражение для валидации емайл */

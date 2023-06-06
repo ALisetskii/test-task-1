@@ -1,65 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 
 import { FIELDS_EXAMPLE } from '@shared/constants';
-import { FormValues } from '@shared/types';
-import {
-  validateFormValue,
-  validateForm,
-  createValuesFromFields,
-} from '@shared/util';
+import { Result } from '@shared/types';
 
 import {
   DynamicForm,
   SubmitButton,
+  useFormControl
 } from '@features/dynamic-form-without-redux';
 
 import './MainPage.scss';
 
+
 export const MainPage: React.FC = () => {
   const fields = FIELDS_EXAMPLE;
 
-  const [formValues, setFormValues] = useState<FormValues>({});
-  const [isFormValid, setisFormValid] = useState<boolean>(false);
+  const { values, onChange, checkIsFormValid } = useFormControl(fields);
 
-  /**
-   * Обработчик редактирования значения поля
-   * @param {string} id ид инпута
-   * @param {string} value значение
-   * @param {string} type тип инпута
-   * @returns {void}
-   */
-  const onInputChange = (id: string, value: string, type: string): void => {
-    setFormValues({
-      ...formValues,
-      [id]: {
-        ...formValues[id],
-        value: value,
-        isValid: validateFormValue(value, type),
-      },
-    });
+  const isFormValid = useMemo<boolean>(()=>{
+    return checkIsFormValid();
+  }, [values]);
+
+  const handleClick = () => {
+    // Исправил на reduce
+    const result: Result = Object.keys(values).reduce((acc, key)=>{
+      return { ...acc, [key]: values[key] };
+    }, {});
+
+    console.log(result);
   };
-
-  /** Создание объекта со значениями по объекту с полями */
-
-  useEffect(() => {
-    const initialValues = createValuesFromFields(fields);
-    setFormValues(initialValues);
-  }, [fields]);
-
-  /** Проверка валидности формы */
-  useEffect(() => {
-    setisFormValid(validateForm(formValues));
-  }, [formValues]);
 
   return (
     <div className={'wrapper'}>
       <div className={'form-container'}>
         <DynamicForm
           fields={fields}
-          values={formValues}
-          onInputChange={onInputChange}
+          values={values}
+          onChange={onChange}
         />
-        <SubmitButton values={formValues} isFormValid={isFormValid} />
+        <SubmitButton handleClick={handleClick} isFormValid={isFormValid} />
       </div>
     </div>
   );
